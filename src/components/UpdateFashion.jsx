@@ -1,8 +1,10 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const UpdateFashion = () => {
   const fashion = useLoaderData() 
   const {name, price, details, photo, _id} = fashion;
+  const navigate = useNavigate('/')
   const handleUpdateFashion = (e) => {
     e.preventDefault();
 
@@ -17,20 +19,28 @@ const UpdateFashion = () => {
     fetch(`http://localhost:4500/fashions/${_id}`,{
       method: 'PUT',
       headers:{
-        'content-type': 'application/json'
+        "content-type": "application/json",
       },
       body: JSON.stringify(updatedFashion)
     })
     .then(res=> res.json())
     .then(data=> {
       console.log(data)
+      if(data.modifiedCount > 0){
+        Swal.fire({
+          title: "success",
+          text: "Fashion updated successfully",
+          icon: "success"
+        });
+        navigate('/')
+      }
     })
 
   };
   return (
     <div className="w-2/4 mx-auto">
       <form onSubmit={handleUpdateFashion} className="bg-slate-200 p-5">
-        <h1 className="text-3xl text-center font-bold">Add Fashion</h1>
+        <h1 className="text-3xl text-center font-bold">Update Fashion</h1>
         <div className=" grid md:grid-cols-2 gap-5">
           <div className="w-full mt-2">
             <label>Name</label>

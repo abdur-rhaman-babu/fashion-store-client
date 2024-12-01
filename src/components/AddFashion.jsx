@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 const AddFashion = () => {
+  const navigate = useNavigate()
   const handleAddFashion = (e) => {
     e.preventDefault();
 
@@ -20,6 +24,14 @@ const AddFashion = () => {
     .then(res=> res.json())
     .then(data=> {
       console.log(data)
+      if(data.insertedId){
+        Swal.fire({
+          title: "success",
+          text: "Fashion Successfully added",
+          icon: "success"
+        });
+        navigate('/')
+      }
     })
   };
   return (
@@ -35,6 +47,7 @@ const AddFashion = () => {
               type="text"
               placeholder="name"
               name="name"
+              required
             />
           </div>
           <div className="w-full mt-2">
@@ -45,6 +58,7 @@ const AddFashion = () => {
               type="text"
               placeholder="price"
               name="price"
+              required
             />
           </div>
           <div className="w-full mt-2">
@@ -55,6 +69,7 @@ const AddFashion = () => {
               type="text"
               placeholder="details"
               name="details"
+              required
             />
           </div>
           <div className="w-full mt-2">
@@ -65,6 +80,7 @@ const AddFashion = () => {
               type="text"
               placeholder="photo"
               name="photo"
+              required
             />
           </div>
         </div>
