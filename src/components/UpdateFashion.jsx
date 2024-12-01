@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router-dom";
 
 const UpdateFashion = () => {
   const fashion = useLoaderData() 
-  const {name, price, details, photo} = fashion;
+  const {name, price, details, photo, _id} = fashion;
   const handleUpdateFashion = (e) => {
     e.preventDefault();
 
@@ -11,8 +11,20 @@ const UpdateFashion = () => {
     const price = form.price.value;
     const details = form.details.value;
     const photo = form.photo.value;
-    const fashion = { name, price, details, photo };    
-    console.log(fashion);
+    const updatedFashion = { name, price, details, photo };    
+    console.log(updatedFashion);
+
+    fetch(`http://localhost:4500/fashions/${_id}`,{
+      method: 'PUT',
+      headers:{
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(updatedFashion)
+    })
+    .then(res=> res.json())
+    .then(data=> {
+      console.log(data)
+    })
 
   };
   return (
