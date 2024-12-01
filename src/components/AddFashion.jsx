@@ -9,6 +9,18 @@ const AddFashion = () => {
     const photo = form.photo.value;
     const fashion = { name, price, details, photo };    
     console.log(fashion);
+
+    fetch('http://localhost:4500/fashions',{
+      method:'POST',
+      headers:{
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(fashion)
+    })
+    .then(res=> res.json())
+    .then(data=> {
+      console.log(data)
+    })
   };
   return (
     <div className="w-2/4 mx-auto">
