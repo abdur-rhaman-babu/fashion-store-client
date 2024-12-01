@@ -12,21 +12,23 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Mainlayout />,
-    children:[
+    children: [
       {
-        path:'/',
-        element:<Home/>,
-        loader: ()=> fetch('http://localhost:4500/fashions')
+        path: "/",
+        element: <Home />,
+        loader: () => fetch("http://localhost:4500/fashions"),
       },
       {
-        path:'/addFashion',
-        element:<AddFashion/>
+        path: "/addFashion",
+        element: <AddFashion />,
       },
       {
-        path:'/updateFashion',
-        element:<UpdateFashion/>
+        path: "/updateFashion/:id",
+        element: <UpdateFashion />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:4500/fashions/${params.id}`),
       },
-    ]
+    ],
   },
 ]);
 

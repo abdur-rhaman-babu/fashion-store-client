@@ -1,5 +1,6 @@
 import { FaEye, FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const FashionCard = ({ fashion, fashions, setFashions }) => {
   const { name, price, details, photo, _id } = fashion;
@@ -33,7 +34,7 @@ const FashionCard = ({ fashion, fashions, setFashions }) => {
       </div>
       <div className="flex items-center gap-4 justify-end">
         <button><FaEye size={35}/></button>
-        <button><FaRegEdit size={35}/></button>
+        <Link to={`/updateFashion/${_id}`}><button><FaRegEdit size={35}/></button></Link>
         <button onClick={()=>handleDeleteFashion(_id)} className="text-red-600"><MdDelete size={35}/></button>
       </div>
     </div>
