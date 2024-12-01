@@ -1,7 +1,7 @@
 import { FaEye, FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
-const FashionCard = ({ fashion }) => {
+const FashionCard = ({ fashion, fashions, setFashions }) => {
   const { name, price, details, photo, _id } = fashion;
 
   const handleDeleteFashion = (id) =>{
@@ -12,6 +12,10 @@ const FashionCard = ({ fashion }) => {
     .then(res=> res.json())
     .then(data=> {
         console.log(data)
+        if(data.deletedCount > 0){
+            const remaining = fashions.filter(fashion=> fashion._id !== id)
+            setFashions(remaining)
+        }
     })
   }
 
